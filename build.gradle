@@ -9,7 +9,6 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 java {
-	options.fork = false
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
@@ -19,15 +18,13 @@ repositories {
 	mavenCentral()
 }
 
-
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
 	implementation 'co.elastic.clients:elasticsearch-java:8.13.0'
-	
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -35,6 +32,15 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-test {
-    maxParallelForks = 1
+// Integrazione per ambiente OpenShift / CI/CD container-based
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+}
+
+bootJar {
+	archiveFileName = "app.jar"
+}
+
+tasks.register('stage') {
+	dependsOn 'build'
 }
