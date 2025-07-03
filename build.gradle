@@ -9,6 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 java {
+	options.fork = false
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
@@ -32,4 +33,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+test {
+    maxParallelForks = 1
 }
