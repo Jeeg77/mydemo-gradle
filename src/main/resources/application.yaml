@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  
+spring:
+  elasticsearch:
+    uris: http://localhost:9200
+    username: elastic
+    password: XWBQ1rEU7rlw8WLWPYJf
+  application:
+    name: books-api
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
