@@ -1,0 +1,1 @@
+{"books":{"mappings":{"properties":{"_class":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},"author":{"type":"keyword"},"id":{"type":"text","fields":{"keyword":{"type":"keyword","ignore_above":256}}},"title":{"type":"text"},"year":{"type":"integer"}}}}}

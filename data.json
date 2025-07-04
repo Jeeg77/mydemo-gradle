@@ -1,0 +1,12 @@
+{"_index":"books","_id":"m5WYppcBvThnHq94v5Dw","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"m5WYppcBvThnHq94v5Dw","title":"Delitto e Castigo","author":"Fedor Michajlovic Dostoevskij","year":1866}}
+{"_index":"books","_id":"nJWYppcBvThnHq94v5Dw","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"nJWYppcBvThnHq94v5Dw","title":"La Montagna Incantata","author":"Thomas Mann","year":1924}}
+{"_index":"books","_id":"kpVfppcBvThnHq94UZCO","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"kpVfppcBvThnHq94UZCO","title":"Il Gattopardo","author":"Giuseppe Tomasi di Lampedusa","year":1958}}
+{"_index":"books","_id":"mZWWppcBvThnHq94gJCO","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"mZWWppcBvThnHq94gJCO","title":"Alla ricerca del tempo perduto","author":"Marcel Proust","year":1913}}
+{"_index":"books","_id":"k5VfppcBvThnHq94UZCO","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"k5VfppcBvThnHq94UZCO","title":"La Coscienza di Zeno","author":"Italo Svevo","year":1923}}
+{"_index":"books","_id":"oJWappcBvThnHq94p5BV","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"oJWappcBvThnHq94p5BV","title":"Moby Dick","author":"Herman Melville","year":1851}}
+{"_index":"books","_id":"mJWUppcBvThnHq94GZAI","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"mJWUppcBvThnHq94GZAI","title":"Uno, nessuno, centomila","author":"Luigi Pirandello","year":1926}}
+{"_index":"books","_id":"lZWSppcBvThnHq942JBR","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"lZWSppcBvThnHq942JBR","title":"Narciso e Boccadoro","author":"Hermann Hesse","year":1930}}
+{"_index":"books","_id":"lpWSppcBvThnHq942JBR","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"lpWSppcBvThnHq942JBR","title":"Orgoglio e Pregiudizio","author":"Jane Austen","year":1813}}
+{"_index":"books","_id":"l5WUppcBvThnHq94GZAI","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"l5WUppcBvThnHq94GZAI","title":"Il Profumo","author":"Patrick Suskind","year":1985}}
+{"_index":"books","_id":"o5WjppcBvThnHq94oJCA","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"o5WjppcBvThnHq94oJCA","title":"La Metamorfosi","author":"Franz Kafka","year":1915}}
+{"_index":"books","_id":"OPe5jZcBShpJSwUcZxs_","_score":1,"_source":{"_class":"com.example.demo.entity.Book","id":"OPe5jZcBShpJSwUcZxs_","title":"Il Nome della Rosa","author":"Umberto Eco","year":1980}}

@@ -3,7 +3,7 @@ server:
   
 spring:
   elasticsearch:
-    uris: http://localhost:9200
+    uris: http://elasticsearch:9200
     username: elastic
     password: XWBQ1rEU7rlw8WLWPYJf
   application:
