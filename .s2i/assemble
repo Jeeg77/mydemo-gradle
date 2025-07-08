@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+echo "Running Gradle build..."
+./gradlew clean build -x test
+
+echo "Looking for JAR to deploy..."
+JAR=$(find build/libs -type f -name "*.jar" ! -name "*-plain.jar" | head -n 1)
+
+if [ -z "$JAR" ]; then
+  echo "ERROR: No suitable JAR found in build/libs!"
+  exit 1
+fi
+
+echo "Copying $JAR to /deployments/"
+cp "$JAR" /deployments/
