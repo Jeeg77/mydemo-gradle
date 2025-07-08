@@ -1,7 +1,7 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.2.5'
-	id 'io.spring.dependency-management' version '1.1.4'
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.example'
@@ -9,47 +9,51 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
-	implementation 'co.elastic.clients:elasticsearch-java:8.13.0'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    implementation 'co.elastic.clients:elasticsearch-java:8.13.0'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
-// Integrazione per ambiente OpenShift / CI/CD container-based
-tasks.withType(JavaCompile).configureEach {
-	options.encoding = 'UTF-8'
-}
+// Disabilita il JAR non eseguibile
+jar.enabled = false
 
+// Imposta il nome del bootJar per compatibilità con S2I
 bootJar {
-	archiveFileName = "app.jar"
+    archiveFileName = 'app.jar'
+    // mainClassName può essere definito opzionalmente
+    // Uncomment se vuoi essere esplicito:
+    // mainClass = 'com.example.YourApplication'
 }
 
-tasks.jar {
-    archiveBaseName.set("mydemo-gradle")
-    archiveVersion.set("0.0.1-SNAPSHOT")
-}
-
+// Task utile per Heroku/CI
 tasks.register('stage') {
-	dependsOn 'build'
+    dependsOn 'build'
 }
 
+// Codifica UTF-8
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+// Disattiva test se non necessari in build CI
 test {
     enabled = false
 }
