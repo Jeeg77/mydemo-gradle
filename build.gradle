@@ -41,6 +41,11 @@ bootJar {
 	archiveFileName = "app.jar"
 }
 
+tasks.jar {
+    archiveBaseName.set("mydemo-gradle")
+    archiveVersion.set("0.0.1-SNAPSHOT")
+}
+
 tasks.register('stage') {
 	dependsOn 'build'
 }
