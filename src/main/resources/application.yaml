@@ -3,7 +3,7 @@ server:
   
 spring:
   elasticsearch:
-    uris: http://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com
+    uris: http://elasticsearch:9200
   application:
     name: books-api
 
