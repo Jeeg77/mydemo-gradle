@@ -19,10 +19,10 @@ import org.apache.http.message.BasicHeader;
 @Configuration
 public class ElasticSearchConfig {
 	
-	@Value("${spring.elasticsearch.username}")
+	@Value("${spring.elasticsearch.username:}")
 	private String username;
 
-	@Value("${spring.elasticsearch.password}")
+	@Value("${spring.elasticsearch.password:}")
 	private String password;
 
 
