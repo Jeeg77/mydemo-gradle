@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -euo pipefail
+
+echo "Starting custom S2I assemble script..."
+
+# Define the deployment directory (default: /deployments)
+DEPLOY_DIR="${DEPLOY_DIR:-/deployments}"
+
+# Build the application using Gradle, skipping tests
+echo "Running Gradle build..."
+./gradlew clean build -x test
+
+# Locate the Spring Boot executable JAR
+echo "Searching for Spring Boot fat JAR..."
+JAR=$(find build/libs -type f -name "*.jar" ! -name "*-plain.jar" | head -n 1 || true)
+
+if [ -z "$JAR" ]; then
+  echo "ERROR: No Spring Boot fat JAR found in build/libs"
+  echo "Hint: Check if 'bootJar' is configured correctly in build.gradle"
+  exit 1
+fi
+
+echo "Found JAR: $JAR"
+echo "Copying to deployment directory: $DEPLOY_DIR"
+
+# Copy and rename the JAR to match expected runtime filename
+cp "$JAR" "$DEPLOY_DIR/app.jar"
+
+echo "JAR successfully copied to $DEPLOY_DIR/app.jar"
