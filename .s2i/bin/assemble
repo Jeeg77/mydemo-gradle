@@ -3,6 +3,7 @@
 set -euo pipefail
 
 echo "Starting custom S2I assemble script..."
+cd /tmp/src
 
 # Define the deployment directory (default: /deployments)
 DEPLOY_DIR="${DEPLOY_DIR:-/deployments}"
