@@ -55,17 +55,17 @@ public class BookService {
         repository.deleteById(id);
     }
     
-    public List<Book> findBooksByAuthor(String author) throws ElasticsearchException, IOException{
-    	SearchResponse<Book> response = elasticsearchClient.search(s -> s
-		    .index("books")
-		    .query(q -> q
-		        .match(m -> m
-		            .field("author")
-		            .query(author)
-		        )
-		    ),
-		    Book.class
-		);
+    public List<Book> findBooksByAuthor(String author) throws ElasticsearchException, IOException {
+    	
+    	SearchResponse<Book> response = 
+    		elasticsearchClient.search(s -> 
+	    		s.index("books").query(q -> 
+	    			q.match(m -> 
+	    				m.field("author").query(author)
+	    			)
+	    		), Book.class
+		    );
+    	
     	List<Book> books = response.hits().hits().stream()
     		    .map(Hit::source)
     		    .collect(Collectors.toList());
