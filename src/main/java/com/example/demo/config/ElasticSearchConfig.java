@@ -5,7 +5,11 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.Header;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -14,7 +18,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+
+import javax.net.ssl.SSLContext;
 
 @Configuration
 public class ElasticSearchConfig {
@@ -29,18 +38,31 @@ public class ElasticSearchConfig {
     private String password;
 
     @Bean
-    ElasticsearchClient elasticsearchClient() {
-        HttpHost host = parseHttpHost(elasticsearchUri);
-
-        RestClientBuilder builder = RestClient.builder(host);
+    ElasticsearchClient elasticsearchClient() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException {
+        
+    	HttpHost host                            = parseHttpHost(elasticsearchUri);
+        final BasicCredentialsProvider credsProv = new BasicCredentialsProvider();
 
         // Se username e password sono definiti, vengono utilizzati per l'autenticazione.
         if (username != null && password != null) {
-            builder.setDefaultHeaders(new Header[]{
-                    new BasicHeader("Authorization", basicAuthHeader(username, password))
-            });
+//            builder.setDefaultHeaders(new Header[]{
+//                    new BasicHeader("Authorization", basicAuthHeader(username, password))
+//            });	
+            credsProv.setCredentials(AuthScope.ANY,
+                    new UsernamePasswordCredentials(username, password));
         }
+        
+        // SSL context che accetta tutti i certificati self-signed
+        SSLContext sslContext = SSLContextBuilder.create()
+        		.loadTrustMaterial((chain, authType) -> true)
+                .build();
 
+        RestClientBuilder builder = RestClient.builder(host)
+                .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
+                        .setSSLContext(sslContext)
+                        .setDefaultCredentialsProvider(credsProv)
+                );
+        
         RestClient restClient            = builder.build();
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
 

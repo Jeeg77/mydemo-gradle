@@ -4,11 +4,13 @@ server:
 spring:
   elasticsearch:
     # da localhost a localhost
-    # uris: http://elasticsearch:9200
-    # username: elastic
-    # password: XWBQ1rEU7rlw8WLWPYJf
+    #uris: http://localhost:9200
+    #username: elastic
+    #password: HYxhqLGzvE-HQbo+f3eY
     # da openshift a openshift
     uris: http://elasticsearch:9200
+		username: elastic
+		password: n*XX0GixWvYJLF--l5Dv
     # da localhost a openshift
     # uris: http://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com:80
   application:
