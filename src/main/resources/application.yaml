@@ -5,7 +5,7 @@ spring:
   elasticsearch:
     uris: http://elasticsearch:9200
     username: elastic
-    password: qIzSN36HaxVYfvouC7UZ
+    password: l+KX2_zTMFuauYNgDf=G
 
   application:
     name: books-api
