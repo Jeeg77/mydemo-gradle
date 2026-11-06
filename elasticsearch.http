@@ -1,20 +1,77 @@
-### 1. Creazione indice
-PUT https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti
+### 1. Verifica connessione
+GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/
+
+### 2. Creazione indice BOOKS con mapping (da fare una volta sola)
+PUT https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books
 Content-Type: application/json
 
 < ./mapping.json
 
-
-### 2. Inserimento documento
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti/_doc
-Content-Type: application/json
+### 3. Inserimento libri tramite Bulk API (da fare una volta sola)
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/_bulk
+Content-Type: application/x-ndjson
 
 < ./data.json
 
-
-### 3. Verifica documenti
-GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti/_search?pretty
-
-
-### 4. Elenco indici
+### 4. Verifica indice
 GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/_cat/indices?v
+
+### 5. Conteggio libri
+GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_count
+
+### 6. Visualizzazione di tutti i libri
+GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search?pretty
+
+### 7. Ricerca per titolo
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "title": "Delitto"
+    }
+  }
+}
+
+### 8. Ricerca per autore
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "term": {
+      "author": "Italo Svevo"
+    }
+  }
+}
+
+### 9. Ricerca per intervallo di anni
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "range": {
+      "year": {
+        "gte": 1900,
+        "lte": 1950
+      }
+    }
+  }
+}
+
+### 10. Aggregazione per autore
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+Content-Type: application/json
+
+{
+  "size": 0,
+  "aggs": {
+    "autori": {
+      "terms": {
+        "field": "author"
+      }
+    }
+  }
+}
