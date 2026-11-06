@@ -53,15 +53,20 @@ public class ElasticSearchConfig {
         }
         
         // SSL context che accetta tutti i certificati self-signed
-        SSLContext sslContext = SSLContextBuilder.create()
-        		.loadTrustMaterial((chain, authType) -> true)
-                .build();
+        // SSLContext sslContext = SSLContextBuilder.create()
+        //		.loadTrustMaterial((chain, authType) -> true)
+        //        .build();
+
+        // RestClientBuilder builder = RestClient.builder(host)
+        //        .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
+        //                .setSSLContext(sslContext)
+        //                .setDefaultCredentialsProvider(credsProv)
+        //        );
 
         RestClientBuilder builder = RestClient.builder(host)
-                .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
-                        .setSSLContext(sslContext)
-                        .setDefaultCredentialsProvider(credsProv)
-                );
+        .setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder
+                .setDefaultCredentialsProvider(credsProv)
+        );
         
         RestClient restClient            = builder.build();
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
