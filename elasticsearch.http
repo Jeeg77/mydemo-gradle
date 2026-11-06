@@ -1,0 +1,20 @@
+### 1. Creazione indice
+PUT https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti
+Content-Type: application/json
+
+< ./mapping.json
+
+
+### 2. Inserimento documento
+POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti/_doc
+Content-Type: application/json
+
+< ./data.json
+
+
+### 3. Verifica documenti
+GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/prodotti/_search?pretty
+
+
+### 4. Elenco indici
+GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/_cat/indices?v

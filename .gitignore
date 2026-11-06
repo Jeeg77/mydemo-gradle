@@ -19,3 +19,10 @@ bin/
 
 ### VS Code ###
 .vscode/
+
+#### IntelliJ IDEA ###
+*.iml
+*.ipr       
+*.iws
+.idea/  
+
