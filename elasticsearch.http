@@ -1,29 +1,41 @@
 ### 1. Verifica connessione
-GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/
+@elasticUser = elastic
+@elasticPassword = HYxhqLGzvE-HQbo+f3eY
+
+### Elasticsearch locale
+GET http://localhost:9200
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
+
 
 ### 2. Creazione indice BOOKS con mapping (da fare una volta sola)
-PUT https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books
+PUT http://localhost:9200/books
 Content-Type: application/json
+
 
 < ./mapping.json
 
 ### 3. Inserimento libri tramite Bulk API (da fare una volta sola)
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/_bulk
+POST http://localhost:9200/_bulk
 Content-Type: application/x-ndjson
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 
 < ./data.json
 
 ### 4. Verifica indice
-GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/_cat/indices?v
+GET http://localhost:9200/_cat/indices?v
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 
 ### 5. Conteggio libri
-GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_count
+GET http://localhost:9200/books/_count
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 
 ### 6. Visualizzazione di tutti i libri
-GET https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search?pretty
+GET http://localhost:9200/books/_search?pretty
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 
 ### 7. Ricerca per titolo
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+POST http://localhost:9200/books/_search
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 Content-Type: application/json
 
 {
@@ -34,8 +46,10 @@ Content-Type: application/json
   }
 }
 
+
 ### 8. Ricerca per autore
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+POST http://localhost:9200/books/_search
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 Content-Type: application/json
 
 {
@@ -47,7 +61,8 @@ Content-Type: application/json
 }
 
 ### 9. Ricerca per intervallo di anni
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+POST http://localhost:9200/books/_search
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 Content-Type: application/json
 
 {
@@ -62,7 +77,7 @@ Content-Type: application/json
 }
 
 ### 10. Aggregazione per autore
-POST https://elasticsearch-jeeg-77-dev.apps.rm1.0a51.p1.openshiftapps.com/books/_search
+POST http://localhost:9200/books/_search
 Content-Type: application/json
 
 {

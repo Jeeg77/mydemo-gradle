@@ -3,9 +3,9 @@ server:
 
 spring:
   elasticsearch:
-    uris: http://elasticsearch:9200
-    username: ""
-    password: ""
+    uris: ${ELASTICSEARCH_HOST}
+    username: 
+    password: 
 
   application:
     name: books-api
