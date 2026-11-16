@@ -10,6 +10,7 @@ Authorization: Basic {{elasticUser}} {{elasticPassword}}
 ### 2. Creazione indice BOOKS con mapping (da fare una volta sola)
 PUT http://localhost:9200/books
 Content-Type: application/json
+Authorization: Basic {{elasticUser}} {{elasticPassword}}
 
 
 < ./mapping.json
@@ -55,7 +56,7 @@ Content-Type: application/json
 {
   "query": {
     "term": {
-      "author": "Italo Svevo"
+      "author": "Fedor Dostoevskij"
     }
   }
 }
@@ -90,3 +91,7 @@ Content-Type: application/json
     }
   }
 }
+
+### 11. Cancellazione indice BOOKS
+DELETE http://localhost:9200/books
+Authorization: Basic {{elasticUser}} {{elasticPassword}}

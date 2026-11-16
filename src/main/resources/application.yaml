@@ -3,9 +3,9 @@ server:
 
 spring:
   elasticsearch:
-    uris: ${ELASTICSEARCH_HOST}
-    username: 
-    password: 
+    uris: ${ELASTICSEARCH_HOST:http://localhost:9200}
+    username: ${ELASTICSEARCH_USERNAME:elastic}
+    password: ${ELASTICSEARCH_PASSWORD:HYxhqLGzvE-HQbo+f3eY}
 
   application:
     name: books-api
@@ -15,3 +15,6 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+
+ai-service:
+  base-url: http://localhost:8000
