@@ -21,11 +21,14 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 @Service
 public class BookService {
 	
-	@Autowired
-	private BookRepository repository;
+	private final BookRepository repository;
 	
-	@Autowired
-	private ElasticsearchClient elasticsearchClient;
+	private final ElasticsearchClient elasticsearchClient;
+
+	public BookService(BookRepository repository, ElasticsearchClient elasticsearchClient) {
+		this.repository = repository;
+		this.elasticsearchClient = elasticsearchClient;
+	}
 	
 	public List<Book> listAllBooks() {
 		return SortingItems.mergeBooks(repository.findAll());
